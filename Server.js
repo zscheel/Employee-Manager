@@ -68,7 +68,22 @@ function responseHandler(data) {
         init();
     }
     if (data.choice === 'Add Department') {
-        init();
+        inquirer.prompt(depQuestion).then(data => {
+            const name = data.depName;
+            const sql = `INSERT INTO department(name)
+            VALUES(?)`;
+
+            const params = [name]
+
+            db.query(sql, params, (err, row) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('');
+                console.table(row);
+                init();
+            });
+        });
     }
     if (data.choice === 'Quit') {
         console.log('GoodBye');

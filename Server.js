@@ -20,6 +20,17 @@ const startQuestions = [
 
 function responseHandler(data) {
     if (data.choice === 'View All Employees') {
+        const sql = `SELECT first_name, last_name, role.title as role
+        FROM employee n
+        LEFT JOIN role ON n.role_id = role.id;
+        `
+        db.query(sql, (err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('');
+            console.table(rows);
+        })
         init();
     }
     if (data.choice === 'Add Employee') {

@@ -40,13 +40,32 @@ function responseHandler(data) {
         init();
     }
     if (data.choice === 'View All Roles') {
+        const sql = `SELECT title, department.name AS department, salary 
+        FROM role
+        LEFT JOIN department
+        ON role.department_id = department.id;`;
+        db.query(sql, (err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('');
+            console.table(rows);
+        })
         init();
     }
     if (data.choice === 'Add Role') {
        init();
     }
     if (data.choice === 'View All Departments') {
-       init();
+        const sql = 'SELECT name FROM department';
+        db.query(sql, (err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('');
+            console.table(rows); 
+        });
+        init();
     }
     if (data.choice === 'Add Department') {
         init();

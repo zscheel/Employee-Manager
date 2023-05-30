@@ -91,6 +91,21 @@ function responseHandler(data) {
     }
 }
 
+const depQuestion = [
+    {
+        type: 'input',
+        name: 'depName',
+        message: 'What is the name of the department?',
+        validate: depNameInput => {
+            if (depNameInput) {
+                return true;
+            }
+            console.log('Please enter department name.');
+            return true;
+        }
+    }
+]
+
 
 function init() {
     inquirer.prompt(startQuestions).then(data => {
